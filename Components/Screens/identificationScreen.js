@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 
 class IdentificationScreen extends Component {
 
+
     render() {
       //console.log('test recup redu language : ',this.props.language);
 
@@ -106,6 +107,7 @@ class IdentificationScreen extends Component {
               </TouchableOpacity>
               </ImageBackground>
             </View>
+
           </View>
         );
     }

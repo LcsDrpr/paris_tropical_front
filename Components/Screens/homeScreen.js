@@ -10,7 +10,7 @@ class HomeScreen extends Component {
   
           <View style={{flex:1, backgroundColor:'black'}}>
            
-            <Text>COUCOU</Text>
+            <Text>WELCOME AMIGOS !</Text>
 
           </View>
   
