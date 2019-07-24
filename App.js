@@ -1,12 +1,22 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import './Components/Screens/signUpScreen'
-import SignUpScreen from './Components/Screens/signUpScreen';
+import Navigation from './Components/Navigation/Navigation';
+import language from './Components/Reducers/language.reducer';
+import {Provider} from 'react-redux';
+import {createStore, combineReducers} from 'redux';
+const store = createStore(combineReducers({language}));
 
 export default function App() {
+
   return (
-    <SignUpScreen/>
+
+      <Provider store={store}>
+
+        <Navigation/>
+
+      </Provider>
+    
+
   );
 }
-
 
