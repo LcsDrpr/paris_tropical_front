@@ -7,13 +7,10 @@ class SignInScreen extends Component {
     render() {
   
         return (
-  
-          <View >
-           
-            <Text>COUCOU</Text>
+          <View>
+
 
           </View>
-  
         );
     }
 }

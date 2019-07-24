@@ -7,7 +7,7 @@ class SignUpScreen extends Component {
     return (
       <View style={styles.container}>
          
-        <Input placeholder="FirstName" />
+        <Input placeholder="FirstName"  />
 
         <Input placeholder="LastName" />
         <Input placeholder="Email" />
