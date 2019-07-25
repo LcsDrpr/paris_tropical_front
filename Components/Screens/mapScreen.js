@@ -1,14 +1,18 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button, Picker } from "react-native";
 import MapView from "react-native-maps";
 import { Marker } from "react-native-maps";
+import * as Permissions from "expo-permissions";
+import * as Location from "expo-location";
 
 class MapScreen extends Component {
   state = {
     location: { latitude: 0, longitude: 0 },
     errorMessage: null,
     logPosition: [],
-    displayHistorique: true
+
+    displayHistorique: true,
+    language: null
   };
 
   componentWillMount() {
@@ -32,18 +36,6 @@ class MapScreen extends Component {
         longitude: location.coords.longitude
       });
       this.setState({ logPosition: logPositionCopy });
-
-      // fetch("https://locapicapart1.herokuapp.com/logPosition", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      //   body:
-      //     "facebookid=" +
-      //     this.props.user.userId +
-      //     "&latitude=" +
-      //     location.coords.latitude +
-      //     "&longitude=" +
-      //     location.coords.longitude
-      // });
     }
 
     var currentPosition = {
@@ -51,19 +43,6 @@ class MapScreen extends Component {
       longitude: location.coords.longitude
     };
     this.setState({ location: currentPosition });
-
-    // fetch(
-    //   "https://locapicapart1.herokuapp.com/logPosition?facebookid=" +
-    //     this.props.user.userId
-    // )
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(data => {
-    //     this.setState({
-    //       logPosition: data.historiquePosition
-    //     });
-    //   });
   };
   render() {
     if (this.state.displayHistorique) {
@@ -82,8 +61,28 @@ class MapScreen extends Component {
     }
     return (
       <View style={{ flex: 1 }}>
+        <View
+          style={{
+            flex: 3,
+            marginTop: 20,
+            borderRadius: 4,
+            borderWidth: 1,
+            borderColor: "#d6d7da"
+          }}
+        >
+          <Picker
+            selectedValue={this.state.language}
+            style={{ height: 50, width: 100 }}
+            onValueChange={(itemValue, itemIndex) =>
+              this.setState({ language: itemValue })
+            }
+          >
+            <Picker.Item label="Java" value="java" />
+            <Picker.Item label="JavaScript" value="js" />
+          </Picker>
+        </View>
         <MapView
-          style={{ flex: 1 }}
+          style={{ flex: 2 }}
           region={{
             latitude: this.state.location.latitude,
             longitude: this.state.location.longitude,
@@ -93,12 +92,8 @@ class MapScreen extends Component {
         >
           {makerList}
         </MapView>
-        <Button
-          title="Historique"
-          onPress={() =>
-            this.setState({ displayHistorique: !this.state.displayHistorique })
-          }
-        />
+        <View style={{ flex: 3, backgroundColor: "blue" }} />
+        <Text>hohoh {this.state.language} </Text>
       </View>
     );
   }

@@ -71,6 +71,7 @@ class SignInScreen extends Component {
                 <View style={{flex:1,flexDirection: 'column',alignItems:'center', justifyContent: 'center'}}>
                   <Button style={{ width:'100%', height:40}}
                     title={signInButton}
+                    
                   />
                   <Button style={{ width:'100%', height:40}}
                   title={forPasswordButton}
