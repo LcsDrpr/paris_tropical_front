@@ -28,3 +28,11 @@
     }
   }
 }
+
+// "android": {
+//   "config": {
+//   "googleMaps": {
+//     "apiKey": <Clef d'API>
+//   }
+// }
+// }
