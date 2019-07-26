@@ -103,6 +103,7 @@ class SignInScreen extends Component {
                     titleStyle={{color:'#41479b',textAlign:'center', width:'85%'}}
                     containerStyle={styles.button}
                     title={signInButton}
+<<<<<<< HEAD
 
                     onPress={() =>  fetch('http://10.2.3.144:3000/signin/', {
                       method:'POST',
@@ -121,6 +122,9 @@ class SignInScreen extends Component {
                     })}
 
 
+=======
+                    
+>>>>>>> maps
                   />
 
 

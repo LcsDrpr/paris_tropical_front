@@ -9,6 +9,10 @@
   },
   "dependencies": {
     "expo": "^33.0.0",
+<<<<<<< HEAD
+=======
+    "expo-location": "^5.0.1",
+>>>>>>> maps
     "native-base": "^2.13.1",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
