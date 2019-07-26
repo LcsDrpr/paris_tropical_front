@@ -32,7 +32,7 @@ class IdentificationScreen extends Component {
               headerTitle= {
                 <Image source={require('../../assets/LogoParisTrop.png')}/>
               }
-              titleStyle ={{textAalign:'center'}} 
+              titleStyle ={{textAalign:'center'}}
               barStyle="dark-content"
               //placement="left"
               leftComponent={
@@ -45,7 +45,7 @@ class IdentificationScreen extends Component {
                 <Icon
                   name="chevron-left"
                   size={25}
-                  color="#41479b" 
+                  color="#41479b"
                   onPress={() => { this.props.navigation.goBack() }}
                 />
               }
@@ -79,7 +79,7 @@ class IdentificationScreen extends Component {
                     }
                     iconRight
                     onPress={() => {
-                      this.props.navigation.navigate('signUp')}}
+                      this.props.navigation.navigate('home')}}
                   />
                 </TouchableOpacity>
 
@@ -136,6 +136,6 @@ function mapStateToProps(state) {
 }
 
 export default connect(
-  mapStateToProps, 
+  mapStateToProps,
   null
 )(IdentificationScreen);
