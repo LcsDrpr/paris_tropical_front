@@ -37,17 +37,16 @@ class IdentificationScreen extends Component {
         return (
           <View>
             <Header
-              titleStyle ={{textAalign:'center'}} 
               barStyle="dark-content"
               leftComponent={
                 <Icon
                   name="chevron-left"
                   size={25}
-                  color="#41479b" 
+                  color="#41479b"
                   onPress={() => { this.props.navigation.goBack() }}
                 />
               }
-              centerComponent={ 
+              centerComponent={
                 <Image
                 style={{height:35, width:50}}
                 source={this.state.logo}/>
@@ -61,7 +60,7 @@ class IdentificationScreen extends Component {
 
             <View style={{height:'90%', width:'100%',alignItems:'center', justifyContent: 'center'}}>
               <ImageBackground style={{flex:1,width:'100%', alignItems: 'center', justifyContent: 'center'}} source={this.state.backgroundImg} >
-                
+
                 <TouchableOpacity
                   onPress={() => { this.props.navigation.navigate('signUp')}}
                   style={{ width:'85%',
@@ -81,7 +80,7 @@ class IdentificationScreen extends Component {
                     }
                     iconRight
                     onPress={() => {
-                      this.props.navigation.navigate('signUp')}}
+                      this.props.navigation.navigate('home')}}
                   />
                 </TouchableOpacity>
 
@@ -138,6 +137,6 @@ function mapStateToProps(state) {
 }
 
 export default connect(
-  mapStateToProps, 
+  mapStateToProps,
   null
 )(IdentificationScreen);

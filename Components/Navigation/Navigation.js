@@ -7,6 +7,7 @@ import SignInScreen from '../Screens/signInScreen';
 import HomeScreen from '../Screens/homeScreen';
 import MapScreen from '../Screens/mapScreen';
 import PlaceScreen from '../Screens/placeScreen';
+import SidebarScreen from '../Screens/sidebarScreen';
 
 
 var StackNavigator = createStackNavigator({
@@ -16,7 +17,8 @@ var StackNavigator = createStackNavigator({
     signIn : SignInScreen,
     home : HomeScreen,
     map : MapScreen,
-    place : PlaceScreen
+    place : PlaceScreen,
+    sidebar : SidebarScreen
 }, {headerMode: 'none'})
 
 
