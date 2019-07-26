@@ -48,17 +48,17 @@ class IdentificationScreen extends Component {
               }
               centerComponent={
                 <Image
-                style={{height:35, width:50}}
+                style={{height:40, width:60}}
                 source={this.state.logo}/>
               }
               containerStyle={{
                   backgroundColor: 'white',
                   justifyContent: 'space-around',
-
+                  height:80,
                 }}
             />
 
-            <View style={{height:'90%', width:'100%',alignItems:'center', justifyContent: 'center'}}>
+            <View style={{height:'89%', width:'100%',alignItems:'center', justifyContent: 'center'}}>
               <ImageBackground style={{flex:1,width:'100%', alignItems: 'center', justifyContent: 'center'}} source={this.state.backgroundImg} >
 
                 <TouchableOpacity
@@ -80,7 +80,8 @@ class IdentificationScreen extends Component {
                     }
                     iconRight
                     onPress={() => {
-                      this.props.navigation.navigate('place')}}
+                      this.props.navigation.navigate('signUp')}}
+
                   />
                 </TouchableOpacity>
 

@@ -1,4 +1,4 @@
-import {createAppContainer, createStackNavigator} from 'react-navigation';
+import {createAppContainer, createStackNavigator,createDrawerNavigator} from 'react-navigation';
 
 import LanguagesScreen from '../Screens/languagesScreen';
 import IdentificationScreen from '../Screens/identificationScreen';
@@ -10,15 +10,32 @@ import PlaceScreen from '../Screens/placeScreen';
 import SidebarScreen from '../Screens/sidebarScreen';
 
 
+const MyDrawerNavigator = createDrawerNavigator(
+    {
+        home: HomeScreen,
+        map: MapScreen,
+        place:PlaceScreen
+    },
+    {
+        rawerType: 'back',
+        drawerPosition: 'right',
+        drawerWidth: 150,
+        drawerBackgroundColor: '#ffff',
+        contentComponent:SidebarScreen
+    }
+
+);
+
 var StackNavigator = createStackNavigator({
     language : LanguagesScreen,
     identification : IdentificationScreen,
     signUp : SignUpScreen,
     signIn : SignInScreen,
-    home : HomeScreen,
+    //home : HomeScreen,
     map : MapScreen,
     place : PlaceScreen,
-    sidebar : SidebarScreen
+    sidebar : SidebarScreen,
+    myDrawerNavigator : MyDrawerNavigator
 }, {headerMode: 'none'})
 
 

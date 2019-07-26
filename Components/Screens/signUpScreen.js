@@ -142,9 +142,9 @@ class SignUpScreen extends Component {
                 .then(function(response) {
                   return response.json();
                 })
-                .then((data)=>{
-                  console.log(data);
-                  this.props.handleUserValid(data.user.lastname,data.user.firstname,data.user.email,data.user.city,data.user.country);
+                .then((user)=>{
+                  console.log(user);
+                  this.props.handleUserValid(user.lastname,user.firstname,user.email,user.city,user.country);
                   this.props.navigation.navigate('home');
                 })
               }
