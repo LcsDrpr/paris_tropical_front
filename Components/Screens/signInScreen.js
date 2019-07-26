@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground,TouchableOpacity } from 'react-native';
 import { Input, Header, Button,Image } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {connect} from 'react-redux';
@@ -7,9 +7,24 @@ import {connect} from 'react-redux';
 
 class SignInScreen extends Component {
 
-    render() {
+  constructor() {
+    super();
+    this.state = {
+      backgroundImg:'',
+      logo:'',
+      email: '',
+      passeword:'',
+      errorMessage:''
+    };
+  }
 
-      var backgroundImg = require('../../assets/Backgroundflower.png');
+    componentWillMount(){
+      this.state.backgroundImg = require('../../assets/Backgroundflower.png');
+      this.state.logo = require('../../assets/LogoParisTrop.png');
+    }
+
+
+    render() {
 
       var emailText;
       var passwordText;
@@ -26,26 +41,15 @@ class SignInScreen extends Component {
         passwordText = 'Senha';
         signInButton = 'Registrar'
         forPasswordButton = 'Esqueceu a senha'
-
       }
   
         return (
   
           <View>
             <Header
-              headerTitle= {
-                <Image source={require('../../assets/LogoParisTrop.png')}/>
-              }
               titleStyle ={{textAalign:'center'}} 
               barStyle="dark-content"
-              //placement="left"
               leftComponent={
-                /*<SvgUri
-                  width="25"
-                  height="25"
-                  source={require('../../assets/icons/angle-left.svg')}
-                  onPress={() => { this.props.navigation.goBack() }}
-                />*/
                 <Icon
                   name="chevron-left"
                   size={25}
@@ -53,7 +57,11 @@ class SignInScreen extends Component {
                   onPress={() => { this.props.navigation.goBack() }}
                 />
               }
-              centerComponent={{ text: 'MY TITLE', style: { color: '#41479b', textAlign:'center', alignItems:'center' } }}
+              centerComponent={ 
+                <Image
+                style={{height:35, width:50}}
+                source={this.state.logo}/>
+              }
               containerStyle={{
                   backgroundColor: 'white',
                   justifyContent: 'space-around',
@@ -61,26 +69,122 @@ class SignInScreen extends Component {
                 }}
             />
               <View style={{height:'90%', width:'100%',alignItems:'center', justifyContent: 'center'}}>
-              <ImageBackground style={{flex:1,width:'100%', alignItems: 'center', justifyContent: 'center'}} source={backgroundImg} >
+              <ImageBackground style={{flex:1,width:'100%', alignItems: 'center', justifyContent: 'center'}} source={this.state.backgroundImg} >
+
                 <Input
+                  label={emailText}
+                  labelStyle={styles.labelstyle}
+                  inputStyle={styles.placeholderstyle}
+                  containerStyle={{marginBottom:20}}
+                  inputContainerStyle={{height:30}}
                   placeholder={emailText}
+                  onChangeText={(value) => this.setState({email: value})} 
+                    value={this.state.email}
                 />
                 <Input
+                  label={passwordText}
+                  labelStyle={styles.labelstyle}
+                  inputStyle={styles.placeholderstyle}
+                  containerStyle={{marginBottom:20}}
+                  inputContainerStyle={{height:30}}
                   placeholder={passwordText}
+                  onChangeText={(value) => this.setState({password: value})} 
+                    value={this.state.password}
                 />
-                <View style={{flex:1,flexDirection: 'column',alignItems:'center', justifyContent: 'center'}}>
-                  <Button style={{ width:'100%', height:40}}
+                <View style={{flexDirection: 'column',alignItems:'center', justifyContent: 'center'}}>
+
+                <TouchableOpacity
+                  style={{ width:'85%',
+                  height:60,marginTop:20}}
+                >
+
+                  <Button
+                    type='clear'
+                    titleStyle={{color:'#41479b',textAlign:'center', width:'85%'}}
+                    containerStyle={styles.button}
                     title={signInButton}
+
+                    onPress={() =>  fetch('http://10.2.3.144:3000/signin/', {
+                      method:'POST',
+                      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+                      body:'email='+this.state.email+'&password='+this.state.password})
+                    .then(function(response) {
+                      return response.json();
+                    })
+                    .then((user)=>{
+                      if(user.exist == true){
+                        this.props.handleUserValid(user.lastname,user.firstname,user.email,user.city,user.country);
+                        this.props.navigation.navigate('home');
+                      }else{
+                        this.setState({errorMessage: "Votre mot de passe n'est pas le bon"});
+                      }
+                    })}
+
+
                   />
-                  <Button style={{ width:'100%', height:40}}
-                  title={forPasswordButton}
+
+
+                </TouchableOpacity> 
+
+                <TouchableOpacity
+                  style={{ width:'85%',
+                  height:60,marginTop:20}}>
+                  <Button
+                    type='clear'
+                    titleStyle={{color:'#41479b',textAlign:'center',width:'85%'}}
+                    containerStyle={styles.button}
+                    title={forPasswordButton}
                   />
+                </TouchableOpacity> 
                 </View>
                 </ImageBackground>
               </View>
           </View>
         );
     }
+}
+
+const styles = StyleSheet.create({
+
+  placeholderstyle:{
+    color:'rgba(65, 71, 155, 0.7)',
+    fontSize:16,
+  },
+
+  labelstyle:{
+    color:'#41479b',
+    fontSize:12,
+  },
+
+  button: {
+    shadowColor: 'rgba(0,0,0, .4)', // IOS
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS
+    backgroundColor: '#fff',
+    elevation: 2, // Android
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf:'center',
+    height:60,
+    borderRadius:5,
+    width:'85%',
+  }
+})
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    handleUserValid: function(lastname,firstname,email,city,country) { 
+        dispatch( {type: 'setUserData',
+      Nom:lastname,
+      Prenom:firstname,
+      Email:email,
+      City:city,
+      Country:country
+      } ) 
+    }
+  }
 }
 
 
@@ -90,5 +194,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps, 
-  null
+  mapDispatchToProps
 )(SignInScreen);
