@@ -7,13 +7,21 @@ import {connect} from 'react-redux';
 
 
 class IdentificationScreen extends Component {
+  constructor() {
+    super();
+    this.state = {
+      backgroundImg:'',
+      logo:'',
+    };
+  }
 
+    componentWillMount(){
+
+      this.state.backgroundImg = require('../../assets/Backgroundflower.png');
+      this.state.logo = require('../../assets/LogoParisTrop.png');
+    }
 
     render() {
-      //console.log('test recup redu language : ',this.props.language);
-
-      var backgroundImg = require('../../assets/Backgroundflower.png');
-      var backgroundPageImg = require('../../assets/BackgroundPages.png');
 
       var signUpButtonText;
       var signInButtonText;
@@ -29,19 +37,9 @@ class IdentificationScreen extends Component {
         return (
           <View>
             <Header
-              headerTitle= {
-                <Image source={require('../../assets/LogoParisTrop.png')}/>
-              }
               titleStyle ={{textAalign:'center'}} 
               barStyle="dark-content"
-              //placement="left"
               leftComponent={
-                /*<SvgUri
-                  width="25"
-                  height="25"
-                  source={require('../../assets/icons/angle-left.svg')}
-                  onPress={() => { this.props.navigation.goBack() }}
-                />*/
                 <Icon
                   name="chevron-left"
                   size={25}
@@ -49,7 +47,11 @@ class IdentificationScreen extends Component {
                   onPress={() => { this.props.navigation.goBack() }}
                 />
               }
-              centerComponent={{ text: 'MY TITLE', style: { color: '#41479b', textAlign:'center', alignItems:'center' } }}
+              centerComponent={ 
+                <Image
+                style={{height:35, width:50}}
+                source={this.state.logo}/>
+              }
               containerStyle={{
                   backgroundColor: 'white',
                   justifyContent: 'space-around',
@@ -58,10 +60,10 @@ class IdentificationScreen extends Component {
             />
 
             <View style={{height:'90%', width:'100%',alignItems:'center', justifyContent: 'center'}}>
-              <ImageBackground style={{flex:1,width:'100%', alignItems: 'center', justifyContent: 'center'}} source={backgroundImg} >
+              <ImageBackground style={{flex:1,width:'100%', alignItems: 'center', justifyContent: 'center'}} source={this.state.backgroundImg} >
+                
                 <TouchableOpacity
-                  onPress={() => {
-                  this.props.navigation.navigate('signUp')}}
+                  onPress={() => { this.props.navigation.navigate('signUp')}}
                   style={{ width:'85%',
                     height:60,marginBottom:20}}
                 >

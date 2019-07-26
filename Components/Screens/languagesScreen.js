@@ -1,24 +1,56 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View,TouchableOpacity,Image,ImageBackground } from 'react-native';
-import { Button } from 'react-native-elements';
+import { StyleSheet, Text, View,TouchableOpacity,ImageBackground } from 'react-native';
+import { Button,Image } from 'react-native-elements';
 import {connect} from 'react-redux';
+import { Font } from 'expo';
 
 
 class LanguagesScreen extends Component {
 
+  constructor() {
+    super();
+    this.state = {
+        backgroundImg:'',
+        enImg:'',
+        ptImg:'',
+        logo:'',
+        fontLoaded: false,
+    };
+  }
+
+  /*async componentDidMount() {
+
+    await Font.loadAsync({
+      'lato-regular': require('../../assets/Font/Lato/Lato-Regular.ttf')
+    });
+
+    this.setState({fontLoaded:true});
+  }*/
+
+    componentWillMount(){
+
+      /*Font.loadAsync({
+        'lato-regular': require('../../assets/Font/Lato/Lato-Regular.ttf')
+      });
+
+      this.setState({fontLoaded:true});*/
+
+      this.state.enImg = require('../../assets/EnglishButton.png');
+      this.state.ptImg = require('../../assets/PortugeseButton.png');
+      this.state.logo = require('../../assets/LogoParisTrop.png');
+    }
+
     render() {
 
-      var backgroundImg = require('../../assets/BackgroundPages.png');
-      var backgroundPageImg = require('../../assets/BackgroundPages.png');
-
-      var enImg = require('../../assets/EnglishButton.png');
-      var ptImg = require('../../assets/PortugeseButton.png');
   
         return (
   
           <View style={{flex:1, height:'100%', width:'100%',alignItems:'center', justifyContent: 'center'}}>
-            <ImageBackground style={{flex:1,
-              height:'100%',width:'100%', alignItems: 'center', justifyContent: 'center'}} source={backgroundImg} >
+
+            <Image 
+              style={{width:220,height:140,marginBottom:40}}
+              source={this.state.logo}/>
+
             <Text style={{marginBottom:10}}>Escolha o seu idioma</Text>
             <TouchableOpacity
               style={styles.shadow}
@@ -27,7 +59,7 @@ class LanguagesScreen extends Component {
                 this.props.navigation.navigate('identification')}}>
               <Image
                 style={styles.button}
-                source={ptImg}
+                source={this.state.ptImg}
               />
             </TouchableOpacity>
             <Text style={{marginBottom:10}}>Choose your language</Text>
@@ -38,11 +70,9 @@ class LanguagesScreen extends Component {
                 this.props.navigation.navigate('identification')}}>
               <Image
                 style={styles.button}
-                source={enImg}
-                
+                source={this.state.enImg}
               />
             </TouchableOpacity>
-            </ImageBackground>
           </View>
   
         );
@@ -65,10 +95,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#DDDDDD',
     padding: 10,
     width:'auto',
-    height:99.71,
-    width:150,
+    height:82,
+    width:121,
     marginBottom:20,
-    borderRadius:5,
+    borderRadius:5
 
   }
 })

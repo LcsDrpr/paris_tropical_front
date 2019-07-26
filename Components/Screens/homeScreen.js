@@ -8,7 +8,7 @@ class HomeScreen extends Component {
   
         return (
   
-          <View style={{flex:1, backgroundColor:'black'}}>
+          <View style={{flex:1}}>
            
             <Text>WELCOME AMIGOS !</Text>
 
