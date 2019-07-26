@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import React, { Component } from 'react'
 import { Text } from 'react-native'
 import { Header, Left, Button, Icon, Right, Body, Title, Drawer } from 'native-base'
@@ -50,12 +50,12 @@ import { StatusBar } from "react-native";
 
 
 class HomeScreen extends Component {
-  
+
 
     render() {
-  
+
         return (
-  
+
           <Container>
           <Header>
             <Left>
