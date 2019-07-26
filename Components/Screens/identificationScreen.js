@@ -80,7 +80,7 @@ class IdentificationScreen extends Component {
                     }
                     iconRight
                     onPress={() => {
-                      this.props.navigation.navigate('home')}}
+                      this.props.navigation.navigate('signUp')}}
                   />
                 </TouchableOpacity>
 
