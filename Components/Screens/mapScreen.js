@@ -4,6 +4,8 @@ import MapView from "react-native-maps";
 import { Marker } from "react-native-maps";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
+import { Icon, Container, Header, Content, Right } from 'native-base';
+
 
 class MapScreen extends Component {
   state = {
@@ -70,7 +72,7 @@ class MapScreen extends Component {
             borderColor: "#d6d7da"
           }}
         >
-          <Picker
+          <Picker  style={{}} 
             selectedValue={this.state.language}
             style={{ height: 50, width: 100 }}
             onValueChange={(itemValue, itemIndex) =>
@@ -93,7 +95,7 @@ class MapScreen extends Component {
           {makerList}
         </MapView>
         <View style={{ flex: 3, backgroundColor: "blue" }} />
-        <Text>hohoh {this.state.language} </Text>
+        <Text> {this.state.language} </Text>
       </View>
     );
   }
