@@ -134,7 +134,7 @@ class SignUpScreen extends Component {
                 type='clear'
                 titleStyle={{color:'#41479b',textAlign:'center',width:'85%'}}
                 containerStyle={styles.button}
-                onPress={() =>  fetch('http://10.2.3.144/signup', {
+                onPress={() => fetch('http://10.2.3.144:3000/signup/', {
                   method:'POST',
                   headers: {'Content-Type':'application/x-www-form-urlencoded'},
                   body:'firstname='+this.state.firstname+'&lastname='+this.state.lastname+'&email='+this.state.email+'&password='+this.state.password+'&city='+this.state.city
@@ -142,9 +142,9 @@ class SignUpScreen extends Component {
                 .then(function(response) {
                   return response.json();
                 })
-                .then((data)=>{
-                  console.log(data);
-                  this.props.handleUserValid(data.user.lastname,data.user.firstname,data.user.email,data.user.city,data.user.country);
+                .then((user)=>{
+                  console.log(user);
+                  this.props.handleUserValid(user.lastname,user.firstname,user.email,user.city,user.country);
                   this.props.navigation.navigate('home');
                 })
               }

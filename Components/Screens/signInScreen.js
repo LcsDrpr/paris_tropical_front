@@ -13,7 +13,7 @@ class SignInScreen extends Component {
       backgroundImg:'',
       logo:'',
       email: '',
-      passeword:'',
+      password:'',
       errorMessage:''
     };
   }
@@ -65,10 +65,11 @@ class SignInScreen extends Component {
               containerStyle={{
                   backgroundColor: 'white',
                   justifyContent: 'space-around',
-
+                  height:80,
                 }}
             />
               <View style={{height:'90%', width:'100%',alignItems:'center', justifyContent: 'center'}}>
+
               <ImageBackground style={{flex:1,width:'100%', alignItems: 'center', justifyContent: 'center'}} source={this.state.backgroundImg} >
 
                 <Input
