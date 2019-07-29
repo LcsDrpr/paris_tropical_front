@@ -112,11 +112,22 @@ class SignInScreen extends Component {
                     .then(function(response) {
                       return response.json();
                     })
-                    .then((user)=>{
-                      console.log('CONSOLE LOG USER FRONT : ',user);
-                      if(user.exist == true){
-                        this.props.handleUserValid(user.lastname,user.firstname,user.email,user.city,user.country);
-                        this.props.navigation.navigate('home');
+                    .then((data)=>{
+
+                      if(data.exist == true){
+                        this.props.handleUserValid(data.user.lastname, data.user.firstname, data.user.email,data.user.city, data.user.country);
+                        fetch('http://10.2.3.144:3000/getMeteo/')
+                        .then(function(response) {
+                          return response.json();
+                        })
+                        .then((meteo)=>{
+                          console.log('FULL METEO : ',meteo);
+                          console.log('METEO MAIN : ',meteo.jsonBody.main.temp);
+                          console.log('METEO WEATHER PART : ',meteo.jsonBody.weather[0].icon);
+                          this.props.getMeteo(meteo.jsonBody.main.temp, meteo.jsonBody.weather[0].icon);
+                          this.props.navigation.navigate('home');
+                        });
+
                       }else{
                         this.setState({errorMessage: "Votre mot de passe n'est pas le bon"});
                       }
@@ -124,7 +135,6 @@ class SignInScreen extends Component {
 
 
                   />
-
 
                 </TouchableOpacity>
 
@@ -176,15 +186,23 @@ const styles = StyleSheet.create({
 
 
 function mapDispatchToProps(dispatch) {
+
   return {
     handleUserValid: function(lastname,firstname,email,city,country) {
-        dispatch( {type: 'setUserData',
-      Nom:lastname,
-      Prenom:firstname,
-      Email:email,
-      City:city,
-      Country:country
-      } )
+      dispatch( {type: 'setUserData',
+        Nom:lastname,
+        Prenom:firstname,
+        Email:email,
+        City:city,
+        Country:country
+      })
+    },
+    getMeteo: function(temp, icon){
+      console.log("TEMPERATURE !",temp + "ICONE PEUTETRE SOLEIL",icon);
+      dispatch({ type : 'getCurrentMeteo',
+      Temperature : temp,
+      WeatherIcone : icon,
+      })
     }
   }
 }

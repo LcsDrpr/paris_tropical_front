@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View,TouchableOpacity,ImageBackground } from 'react-native';
-import { Button,Image } from 'react-native-elements';
+import { StyleSheet, Text, View,TouchableOpacity,ImageBackground,Image } from 'react-native';
+import { Button } from 'react-native-elements';
 import {connect} from 'react-redux';
 import { Font } from 'expo';
 
@@ -10,11 +10,10 @@ class LanguagesScreen extends Component {
   constructor() {
     super();
     this.state = {
-        backgroundImg:'',
         enImg:'',
         ptImg:'',
         logo:'',
-        fontLoaded: false,
+        filesLoaded: false,
     };
   }
 
@@ -27,55 +26,72 @@ class LanguagesScreen extends Component {
     this.setState({fontLoaded:true});
   }*/
 
-    componentWillMount(){
+    componentDidMount(){
 
       /*Font.loadAsync({
         'lato-regular': require('../../assets/Font/Lato/Lato-Regular.ttf')
       });
 
-      this.setState({fontLoaded:true});*/
+      this.setState({filesLoaded:true});*/
 
-      this.state.enImg = require('../../assets/EnglishButton.png');
-      this.state.ptImg = require('../../assets/PortugeseButton.png');
-      this.state.logo = require('../../assets/LogoParisTrop.png');
+      this.setState(
+        {
+          enImg : require('../../assets/EnglishButton.png'),
+          ptImg : require('../../assets/PortugeseButton.png'),
+          logo : require('../../assets/LogoParisTrop.png'),
+          filesLoaded:true
+        });
+
+      //this.setState({filesLoaded:true});
     }
 
     render() {
 
   
-        return (
-  
-          <View style={{flex:1, height:'100%', width:'100%',alignItems:'center', justifyContent: 'center'}}>
+        if(this.state.filesLoaded == false ){
+          console.log('ok');
+          return(
 
-            <Image 
-              style={{width:220,height:140,marginBottom:40}}
-              source={this.state.logo}/>
+            <Text>Coucou les frères ! </Text>
 
-            <Text style={{marginBottom:10}}>Escolha o seu idioma</Text>
-            <TouchableOpacity
-              style={styles.shadow}
-              onPress={() => {
-                this.props.ptChosen();
-                this.props.navigation.navigate('identification')}}>
-              <Image
-                style={styles.button}
-                source={this.state.ptImg}
-              />
-            </TouchableOpacity>
-            <Text style={{marginBottom:10}}>Choose your language</Text>
-            <TouchableOpacity
-              style={styles.shadow}
-              onPress={() => {
-                this.props.enChosen();
-                this.props.navigation.navigate('identification')}}>
-              <Image
-                style={styles.button}
-                source={this.state.enImg}
-              />
-            </TouchableOpacity>
-          </View>
-  
-        );
+          );
+
+        }
+        else if(this.state.filesLoaded == true ){
+          return (
+    
+            <View style={{flex:1, height:'100%', width:'100%',alignItems:'center', justifyContent: 'center'}}>
+
+              <Image 
+                style={{width:220,height:140,marginBottom:40}}
+                source={this.state.logo}/>
+
+              <Text style={{marginBottom:10}}>Escolha o seu idioma</Text>
+              <TouchableOpacity
+                style={styles.shadow}
+                onPress={() => {
+                  this.props.ptChosen();
+                  this.props.navigation.navigate('identification')}}>
+                <Image
+                  style={styles.button}
+                  source={this.state.ptImg}
+                />
+              </TouchableOpacity>
+              <Text style={{marginBottom:10}}>Choose your language</Text>
+              <TouchableOpacity
+                style={styles.shadow}
+                onPress={() => {
+                  this.props.enChosen();
+                  this.props.navigation.navigate('identification')}}>
+                <Image
+                  style={styles.button}
+                  source={this.state.enImg}
+                />
+              </TouchableOpacity>
+            </View>
+    
+          );
+        }
     }
 }
 

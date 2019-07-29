@@ -94,7 +94,7 @@ class SignUpScreen extends Component {
             <Input
               label={lastnameText}
               labelStyle={styles.labelstyle}
-              inputStyle={styles.placeholderstyle}
+              inputStyle={styles.placeholderstyle}ê
               containerStyle={{marginTop:10}}
               inputContainerStyle={{height:30}}
               placeholder={lastnameText} onChangeText={(value) => this.setState({lastname: value})} value={this.state.lastname}
@@ -142,10 +142,21 @@ class SignUpScreen extends Component {
                 .then(function(response) {
                   return response.json();
                 })
-                .then((user)=>{
-                  console.log(user);
-                  this.props.handleUserValid(user.lastname,user.firstname,user.email,user.city,user.country);
-                  this.props.navigation.navigate('home');
+                .then((data)=>{
+                  console.log(data);
+                  this.props.handleUserValid(data.user.lastname,data.user.firstname,data.user.email,data.user.city,data.user.country);
+                  fetch('http://10.2.3.144:3000/getMeteo/')
+                    .then(function(response) {
+                      return response.json();
+                    })
+                    .then((meteo)=>{
+                      console.log('FULL METEO : ',meteo);
+                      console.log('METEO MAIN : ',meteo.jsonBody.main.temp);
+                      console.log('METEO WEATHER PART : ',meteo.jsonBody.weather[0].icon);
+                      this.props.getMeteo(meteo.jsonBody.main.temp, meteo.jsonBody.weather[0].icon);
+                      this.props.navigation.navigate('home');
+                    });
+
                 })
               }
 
@@ -197,6 +208,13 @@ function mapDispatchToProps(dispatch) {
       City:city,
       Country:country
       } )
+    },
+    getMeteo: function(temp, icon){
+      console.log("TEMPERATURE !",temp + "ICONE PEUTETRE SOLEIL",icon);
+      dispatch({ type : 'getCurrentMeteo',
+      Temperature : temp,
+      WeatherIcone : icon,
+      })
     }
   }
 }
