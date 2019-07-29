@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {connect} from 'react-redux';
 import SvgUri from 'react-native-svg-uri';
 
-
 class HomeScreen extends Component {
   constructor(props) {
     super(props)
