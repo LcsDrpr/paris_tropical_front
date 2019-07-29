@@ -105,7 +105,7 @@ class SignInScreen extends Component {
                     containerStyle={styles.button}
                     title={signInButton}
 
-                    onPress={() =>  fetch('http://10.2.3.144:3000/signin/', {
+                    onPress={() =>  fetch('http://10.2.3.138:3000/signin/', {
                       method:'POST',
                       headers: {'Content-Type':'application/x-www-form-urlencoded'},
                       body:'email='+this.state.email+'&password='+this.state.password})
@@ -113,6 +113,7 @@ class SignInScreen extends Component {
                       return response.json();
                     })
                     .then((user)=>{
+                      console.log('CONSOLE LOG USER FRONT : ',user);
                       if(user.exist == true){
                         this.props.handleUserValid(user.lastname,user.firstname,user.email,user.city,user.country);
                         this.props.navigation.navigate('home');
