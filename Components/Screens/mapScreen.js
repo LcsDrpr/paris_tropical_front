@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, Picker } from "react-native";
+import { StyleSheet, Text, View, Button, Picker, ScrollView,  } from "react-native";
 import MapView from "react-native-maps";
 import { Marker } from "react-native-maps";
 import * as Permissions from "expo-permissions";
@@ -18,14 +18,19 @@ class Menupicker extends Component {
     return (
         <Picker 
           selectedValue={this.state.language}
-          style={{ height: 50, width: 100,  }}
+          style={{ height: 50, width: 100, marginTop: 20  }}
           onValueChange={(itemValue, itemIndex) =>
             this.setState({ language: itemValue })
           }
         >
           <Picker.Item label="Java" value="java" />
           <Picker.Item label="JavaScript" value="js" />
+          <Picker.Item label="JavaScript" value="js" />
+
+
+
         </Picker>
+ 
      
     );
   }
@@ -158,7 +163,8 @@ class MapScreen extends Component {
       },
     ]
     return (
-      <View >
+      <ScrollView> 
+
          {
     list.map((l, i) => (
       <ListItem 
@@ -168,7 +174,8 @@ class MapScreen extends Component {
       />
     ))
   }
-      </View>
+      </ScrollView> 
+
     )
   }
 }
