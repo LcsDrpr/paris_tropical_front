@@ -105,7 +105,7 @@ class SignInScreen extends Component {
                     containerStyle={styles.button}
                     title={signInButton}
 
-                    onPress={() =>  fetch('http://10.2.3.144:3000/signin/', {
+                    onPress={() =>  fetch('http://10.2.3.40:3000/signin/', {
                       method:'POST',
                       headers: {'Content-Type':'application/x-www-form-urlencoded'},
                       body:'email='+this.state.email+'&password='+this.state.password})

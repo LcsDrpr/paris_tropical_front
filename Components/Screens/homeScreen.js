@@ -4,8 +4,7 @@ import { Input, Header, Button,Image } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {connect} from 'react-redux';
 import SvgUri from 'react-native-svg-uri';
-//import { Header, Left, Button, Icon, Right, Body, Title, Drawer } from 'native-base'
-//import SidebarScreen from './sidebarScreen'
+import SidebarScreen from './sidebarScreen'
 
 export default class HomeScreen extends Component {
   constructor(props) {

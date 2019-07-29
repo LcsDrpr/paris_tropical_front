@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, Picker, ScrollView,  } from "react-native";
+import { StyleSheet, Text, View, Button, Picker, ScrollView, TouchableOpacity,  } from "react-native";
 import MapView from "react-native-maps";
 import { Marker } from "react-native-maps";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
-import { Icon, Container, Header, Content, Right } from 'native-base';
-import { ListItem } from 'react-native-elements';
+import SidebarScreen from './sidebarScreen';
+import { ListItem, Header, Image } from 'react-native-elements';
 
 
 
@@ -37,17 +37,34 @@ class Menupicker extends Component {
 }
 
 class MapScreen extends Component {
-  state = {
-    location: { latitude: 0, longitude: 0 },
+  constructor(props) {
+    super(props)
+    this.state = {
+      backgroundImg:'',
+      logo:'',
+      burger:'',
+      location: { latitude: 0, longitude: 0 },
     errorMessage: null,
     logPosition: [],
-
     displayHistorique: true,
-  };
+
+    }
+    
+  }
+  // state = {
+    
+  // };
+
+
+
+
 
   componentWillMount() {
     this._getLocationAsync();
+    this.state.backgroundImg = require('../../assets/Backgroundflower.png');
+    this.state.logo = require('../../assets/LogoParisTrop.png');
   }
+
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== "granted") {
@@ -91,6 +108,32 @@ class MapScreen extends Component {
     }
     return (
       <View style={{ flex: 1 }}>
+       <Header
+          titleStyle ={{textAalign:'center'}} 
+          barStyle="dark-content"
+          leftComponent={
+            
+            <Image
+            style={{height:35, width:50}}
+            source={this.state.logo}
+            />
+          }
+          containerStyle={{
+            backgroundColor: 'white',
+            justifyContent: 'space-around',
+            height:80,
+          }}
+          rightComponent={
+            <TouchableOpacity
+              onPress={()=>{this.props.navigation.toggleDrawer()}}
+            >
+            <Image
+            style={{height:60, width:60,marginRight:-10}}
+            source={require('../../assets/Burger.png')}
+            />
+            </TouchableOpacity>
+          }
+        />
         <View
           style={{
             flex: 1,
@@ -123,7 +166,7 @@ class MapScreen extends Component {
         </MapView>
 
 
-        <View style={{ flex: 1, justifyContent: 'center'  }}>
+        <View style={{ flex: 1,   }}>
         <Listfood/>
         {/* <Text> {this.state.language} </Text> */}
         </View>
@@ -163,11 +206,13 @@ class MapScreen extends Component {
       },
     ]
     return (
-      <ScrollView> 
+      <View >
+
+      <ScrollView contentContainerStyle={styles.contentContainer}> 
 
          {
     list.map((l, i) => (
-      <ListItem 
+      <ListItem   
         key={i}
         leftAvatar={{ source: { uri: l.avatar_url } }}
         title={l.name}
@@ -175,12 +220,22 @@ class MapScreen extends Component {
     ))
   }
       </ScrollView> 
+      </View>
 
     )
   }
 }
 
-
+// const styles = StyleSheet.create({
+//   contentContainer: {
+//     // paddingVertical: 20,
+//     // borderWidth: 1,
+//     borderColor: 'rgba(0,0,0, .4)',
+//     shadowOffset: { height: 1, width: 1 }, // IOS
+//     shadowOpacity: 1, // IOS
+//     shadowRadius: 1, //IOS
+//   }}
+// )
 
 
 
