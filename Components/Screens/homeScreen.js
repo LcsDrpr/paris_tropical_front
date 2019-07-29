@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Text,TouchableOpacity,View, ImageBackground } from 'react-native'
+import { Text,TouchableOpacity,View, ImageBackground } from 'react-native';
 import { Input, Header, Button,Image } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {connect} from 'react-redux';
 import SvgUri from 'react-native-svg-uri';
 import SidebarScreen from './sidebarScreen'
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -22,6 +22,30 @@ export default class HomeScreen extends Component {
   }
 
   render() {
+
+    
+    var welcomeText;
+    var userName = this.props.user.firstname;
+    var chosenCity = this.props.user.city;
+    var localHour;
+    var awayHour;
+    var exchangeRate;
+
+    console.log('PRENOM',userName);
+
+    if(this.props.language == 'en'){
+      welcomeText = 'Welcome to Paris'+userName+' !';
+      localHour = 'Local Hour';
+      awayHour = chosenCity+' Time';
+      exchangeRate = 'Exchange Rate';
+    }else if(this.props.language == 'pt'){
+      welcomeText = 'Bem-vindo a Paris '+userName+' !';
+      localHour = 'Hora Local';
+      awayHour = 'Hora Do '+chosenCity;
+      exchangeRate = 'Taxa De Cambio';
+    }
+
+    console.log(this.props.user);
     return (
       <View>
         <Header
@@ -52,7 +76,17 @@ export default class HomeScreen extends Component {
         />
         <View style={{height:'90%', width:'100%',alignItems:'center', justifyContent: 'center'}}>
           <ImageBackground style={{flex:1,width:'100%', alignItems: 'center', justifyContent: 'center'}} source={this.state.backgroundImg} >
+            <View>
+              <Text>{welcomeText}</Text>
+            </View>
+            <View>
 
+              <Text>{localHour}</Text>
+              <Text>{awayHour}</Text>
+              <Text>{exchangeRate}</Text>
+
+
+            </View>
 
 
           </ImageBackground>
@@ -66,4 +100,13 @@ export default class HomeScreen extends Component {
     )
   }
 }
-module.exports = HomeScreen;
+
+function mapStateToProps(state) {
+  return { language: state.language, user: state.user  }
+}
+
+
+export default connect(
+  mapStateToProps,
+  null
+)(HomeScreen);
