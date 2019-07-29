@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View,TouchableOpacity,ImageBackground } from 'react-native';
-import { Button, Header,Image } from 'react-native-elements';
+import { StyleSheet, Text, View,TouchableOpacity,ImageBackground,Image } from 'react-native';
+import { Button, Header } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SvgUri from 'react-native-svg-uri';
 import {connect} from 'react-redux';
@@ -12,14 +12,32 @@ class IdentificationScreen extends Component {
     this.state = {
       backgroundImg:'',
       logo:'',
+      filesLoaded: false,
     };
   }
 
-    componentWillMount(){
+  componentDidMount(){
 
-      this.state.backgroundImg = require('../../assets/Backgroundflower.png');
-      this.state.logo = require('../../assets/LogoParisTrop.png');
-    }
+    /*Font.loadAsync({
+      'lato-regular': require('../../assets/Font/Lato/Lato-Regular.ttf')
+    });
+
+    this.setState({filesLoaded:true});*/
+
+    this.setState(
+      {
+        backgroundImg : require('../../assets/Backgroundflower.png'),
+        logo : require('../../assets/LogoParisTrop.png'),
+        filesLoaded:true
+      });
+
+    //this.setState({filesLoaded:true});
+  }
+    // componentWillMount(){
+
+    //   this.state.backgroundImg = require('../../assets/Backgroundflower.png');
+    //   this.state.logo = require('../../assets/LogoParisTrop.png');
+    // }
 
     render() {
 
@@ -34,8 +52,19 @@ class IdentificationScreen extends Component {
         signInButtonText = 'Registrar';
       }
 
+      if(this.state.filesLoaded == false ){
+        console.log('ok');
+        return(
+
+          <Text>Coucou les frères ! </Text>
+
+        );
+
+      }
+      else if(this.state.filesLoaded == true ){
+
         return (
-          <View>
+          <View style={{flex:1}}>
             <Header
               barStyle="dark-content"
               leftComponent={
@@ -54,13 +83,21 @@ class IdentificationScreen extends Component {
               containerStyle={{
                   backgroundColor: 'white',
                   justifyContent: 'space-around',
-                  height:80,
+                  flex:0.1
                 }}
             />
 
-            <View style={{height:'89%', width:'100%',alignItems:'center', justifyContent: 'center'}}>
+            <View style={{flex:0.9, width:'100%',alignItems:'center', justifyContent: 'center'}}>
               <ImageBackground style={{flex:1,width:'100%', alignItems: 'center', justifyContent: 'center'}} source={this.state.backgroundImg} >
+              <TouchableOpacity
+                  onPress={() => { this.props.navigation.navigate('home')}}
+                  style={{ width:'85%',
+                    height:60,marginBottom:20}}
+                >
+                   <Text> PASSE</Text>
+                </TouchableOpacity>
 
+              
                 <TouchableOpacity
                   onPress={() => { this.props.navigation.navigate('signUp')}}
                   style={{ width:'85%',
@@ -80,7 +117,7 @@ class IdentificationScreen extends Component {
                     }
                     iconRight
                     onPress={() => {
-                      this.props.navigation.navigate('map')}}
+                      this.props.navigation.navigate('signUp')}}
                   />
                 </TouchableOpacity>
 
@@ -111,6 +148,7 @@ class IdentificationScreen extends Component {
 
           </View>
         );
+      }
     }
 }
 

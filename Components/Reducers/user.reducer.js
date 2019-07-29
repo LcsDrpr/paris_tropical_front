@@ -8,7 +8,7 @@ export default function(user={}, action) {
             firstname:action.Prenom,
             email:action.Email,
             city:action.City,
-            country: action.country
+            country: action.Country
         }
 
         return userCopy;

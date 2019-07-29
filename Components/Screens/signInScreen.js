@@ -112,9 +112,10 @@ class SignInScreen extends Component {
                     .then(function(response) {
                       return response.json();
                     })
-                    .then((user)=>{
-                      if(user.exist == true){
-                        this.props.handleUserValid(user.lastname,user.firstname,user.email,user.city,user.country);
+                    .then((data)=>{
+                      
+                      if(data.exist == true){
+                        this.props.handleUserValid(data.user.lastname, data.user.firstname, data.user.email,data.user.city, data.user.country);
                         this.props.navigation.navigate('home');
                       }else{
                         this.setState({errorMessage: "Votre mot de passe n'est pas le bon"});
@@ -123,7 +124,6 @@ class SignInScreen extends Component {
 
 
                   />
-
 
                 </TouchableOpacity> 
 
@@ -175,16 +175,19 @@ const styles = StyleSheet.create({
 
 
 function mapDispatchToProps(dispatch) {
+
   return {
     handleUserValid: function(lastname,firstname,email,city,country) { 
-        dispatch( {type: 'setUserData',
-      Nom:lastname,
-      Prenom:firstname,
-      Email:email,
-      City:city,
-      Country:country
+      dispatch( {type: 'setUserData',
+        Nom:lastname,
+        Prenom:firstname,
+        Email:email,
+        City:city,
+        Country:country
       } ) 
     }
+
+
   }
 }
 
