@@ -11,9 +11,11 @@ import { ListItem, Header, Image } from 'react-native-elements';
 
 
 class Menupicker extends Component {
+
   state = {
     language: null
   }
+
   render() {
     return (
         <Picker 
