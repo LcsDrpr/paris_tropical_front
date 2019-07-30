@@ -1,42 +1,58 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, Picker, ScrollView, TouchableOpacity,  } from "react-native";
+import { StyleSheet, Text, View, Button,  ScrollView, TouchableOpacity,  } from "react-native";
 import MapView from "react-native-maps";
 import { Marker } from "react-native-maps";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
 import SidebarScreen from './sidebarScreen';
 import { ListItem, Header, Image } from 'react-native-elements';
+import { Container, Content, Icon, Picker, Form } from "native-base";
 
 
-
-
-class Menupicker extends Component {
-
-  state = {
-    language: null
-  }
-
-  render() {
-    return (
-        <Picker
-          selectedValue={this.state.language}
-          style={{ height: 50, width: 100, marginTop: 20  }}
-          onValueChange={(itemValue, itemIndex) =>
-            this.setState({ language: itemValue })
-          }
-        >
-          <Picker.Item label="Java" value="java" />
-          <Picker.Item label="JavaScript" value="js" />
-          <Picker.Item label="JavaScript" value="js" />
-
-
-
-        </Picker>
-
-
-    );
-  }
+class PickerPlaceholderExample extends Component {
+ constructor(props) {
+   super(props);
+   this.state = {
+     selected: undefined
+   };
+ }
+ onValueChange(value: string) {
+   this.setState({
+     selected: value
+   });
+ }
+ render() {
+   return (
+     <Container>
+       <Header />
+       <Content>
+         <Form>
+           <Picker
+             mode="dropdown"
+             iosIcon={<Icon name="arrow-down" />}
+             placeholder="Select your SIM"
+             placeholderStyle={{ color: "#bfc6ea" }}
+             placeholderIconColor="#007aff"
+             style={{ width: undefined }}
+             selectedValue={this.state.selected}
+             onValueChange={this.onValueChange.bind(this)}
+           >
+             <Picker.Item label="Wallet" value="key0" />
+             <Picker.Item label="ATM Card" value="key1" />
+             <Picker.Item label="Debit Card" value="key2" />
+             <Picker.Item label="Credit Card" value="key3" />
+             <Picker.Item label="Net Banking" value="key4" />
+           </Picker>
+         </Form>
+       </Content>
+     </Container>
+   );
+ }
 }
+
+
+
+
 
 class MapScreen extends Component {
   constructor(props) {
@@ -149,9 +165,9 @@ class MapScreen extends Component {
           }}
         >
 
-          <Menupicker />
-          <Menupicker/>
-          <Menupicker/>
+          <PickerPlaceholderExample/>
+          <PickerPlaceholderExample/>
+          <PickerPlaceholderExample/>
 
         </View>
 
