@@ -18,7 +18,7 @@ class Menupicker extends Component {
 
   render() {
     return (
-        <Picker 
+        <Picker
           selectedValue={this.state.language}
           style={{ height: 50, width: 100, marginTop: 20  }}
           onValueChange={(itemValue, itemIndex) =>
@@ -32,8 +32,8 @@ class Menupicker extends Component {
 
 
         </Picker>
- 
-     
+
+
     );
   }
 }
@@ -51,10 +51,10 @@ class MapScreen extends Component {
     displayHistorique: true,
 
     }
-    
+
   }
   // state = {
-    
+
   // };
 
 
@@ -111,10 +111,10 @@ class MapScreen extends Component {
     return (
       <View style={{ flex: 1 }}>
        <Header
-          titleStyle ={{textAalign:'center'}} 
+          titleStyle ={{textAalign:'center'}}
           barStyle="dark-content"
           leftComponent={
-            
+
             <Image
             style={{height:35, width:50}}
             source={this.state.logo}
@@ -145,7 +145,7 @@ class MapScreen extends Component {
             flexDirection: 'row',
             justifyContent: 'center',
             borderColor: "#d6d7da"
-            
+
           }}
         >
 
@@ -185,7 +185,7 @@ class MapScreen extends Component {
       {
         name: 'City Food',
         avatar_url: 'https://cdn.pixabay.com/photo/2015/10/02/15/59/olive-oil-968657_960_720.jpg',
-       
+
       },
       {
         name: 'Halal Eat ',
@@ -194,50 +194,50 @@ class MapScreen extends Component {
        {
         name: 'City Food',
         avatar_url: 'https://cdn.pixabay.com/photo/2015/10/02/15/59/olive-oil-968657_960_720.jpg',
-       
+
       },
       {
         name: 'City Food',
         avatar_url: 'https://cdn.pixabay.com/photo/2015/10/02/15/59/olive-oil-968657_960_720.jpg',
-       
+
       },
       {
         name: 'City Food',
         avatar_url: 'https://cdn.pixabay.com/photo/2015/10/02/15/59/olive-oil-968657_960_720.jpg',
-       
+
       },
     ]
     return (
       <View >
 
-      <ScrollView contentContainerStyle={styles.contentContainer}> 
+      <ScrollView contentContainerStyle={styles.contentContainer}>
 
          {
     list.map((l, i) => (
-      <ListItem   
+      <ListItem
         key={i}
         leftAvatar={{ source: { uri: l.avatar_url } }}
         title={l.name}
       />
     ))
   }
-      </ScrollView> 
+      </ScrollView>
       </View>
 
     )
   }
 }
 
-// const styles = StyleSheet.create({
-//   contentContainer: {
-//     // paddingVertical: 20,
-//     // borderWidth: 1,
-//     borderColor: 'rgba(0,0,0, .4)',
-//     shadowOffset: { height: 1, width: 1 }, // IOS
-//     shadowOpacity: 1, // IOS
-//     shadowRadius: 1, //IOS
-//   }}
-// )
+const styles = StyleSheet.create({
+  contentContainer: {
+    // paddingVertical: 20,
+    // borderWidth: 1,
+    borderColor: 'rgba(0,0,0, .4)',
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS
+  }}
+)
 
 
 

@@ -116,7 +116,7 @@ class SignInScreen extends Component {
 
                       if(data.exist == true){
                         this.props.handleUserValid(data.user.lastname, data.user.firstname, data.user.email,data.user.city, data.user.country);
-                        fetch('http://10.2.3.144:3000/getMeteo/')
+                        fetch('http://10.2.3.138:3000/getMeteo/')
                         .then(function(response) {
                           return response.json();
                         })
