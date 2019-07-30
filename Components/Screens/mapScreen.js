@@ -226,16 +226,16 @@ class MapScreen extends Component {
   }
 }
 
-// const styles = StyleSheet.create({
-//   contentContainer: {
-//     // paddingVertical: 20,
-//     // borderWidth: 1,
-//     borderColor: 'rgba(0,0,0, .4)',
-//     shadowOffset: { height: 1, width: 1 }, // IOS
-//     shadowOpacity: 1, // IOS
-//     shadowRadius: 1, //IOS
-//   }}
-// )
+const styles = StyleSheet.create({
+  contentContainer: {
+    // paddingVertical: 20,
+    // borderWidth: 1,
+    borderColor: 'rgba(0,0,0, .4)',
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS
+  }}
+)
 
 
 
