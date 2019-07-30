@@ -6,49 +6,53 @@ import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
 import SidebarScreen from './sidebarScreen';
 import { ListItem, Header, Image } from 'react-native-elements';
-import { Container, Content, Icon, Picker, Form } from "native-base";
+import { Container, Content, Icon, Picker, Form, TextStyle } from "native-base";
+
+
 
 
 class PickerPlaceholderExample extends Component {
- constructor(props) {
-   super(props);
-   this.state = {
-     selected: undefined
-   };
- }
- onValueChange(value: string) {
-   this.setState({
-     selected: value
-   });
- }
- render() {
-   return (
-     <Container>
-       <Header />
-       <Content>
-         <Form>
-           <Picker
-             mode="dropdown"
-             iosIcon={<Icon name="arrow-down" />}
-             placeholder="Select your SIM"
-             placeholderStyle={{ color: "#bfc6ea" }}
-             placeholderIconColor="#007aff"
-             style={{ width: undefined }}
-             selectedValue={this.state.selected}
-             onValueChange={this.onValueChange.bind(this)}
-           >
-             <Picker.Item label="Wallet" value="key0" />
-             <Picker.Item label="ATM Card" value="key1" />
-             <Picker.Item label="Debit Card" value="key2" />
-             <Picker.Item label="Credit Card" value="key3" />
-             <Picker.Item label="Net Banking" value="key4" />
-           </Picker>
-         </Form>
-       </Content>
-     </Container>
-   );
- }
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: undefined
+    };
+  }
+  onValueChange(value: string) {
+    this.setState({
+      selected: value
+    });
+  }
+  render() {
+    return (
+      <Content>
+        <Form>
+          <Picker
+            mode="dropdown"
+            iosIcon={<Icon name="arrow-down" style={{fontSize: 10}} />}
+            placeholder="Select you sim"
+            placeholderStyle={{ color: "#bfc6ea" }}
+            placeholderIconColor="#007aff"
+            textStyle={{fontSize: 12, paddingRight: 0}}
+            style={{ width: "100%" }}
+            selectedValue={this.state.selected}
+            onValueChange={this.onValueChange.bind(this)}
+          >
+            <Picker.Item label="Wallet" value="key0" />
+            <Picker.Item label="ATM Card" value="key1" />
+            <Picker.Item label="Debit Card" value="key2" />
+            <Picker.Item label="Credit Card" value="key3" />
+            <Picker.Item label="Net Banking" value="key4" />
+          </Picker>
+        </Form>
+      </Content>
+    );
+  }
 }
+
+
+
+
 
 
 
@@ -125,7 +129,7 @@ class MapScreen extends Component {
       });
     }
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 2 }}>
        <Header
           titleStyle ={{textAalign:'center'}}
           barStyle="dark-content"
@@ -183,7 +187,7 @@ class MapScreen extends Component {
         </MapView>
 
 
-        <View style={{ flex: 3,   }}>
+        <View style={{ flex: 2,   }}>
         <Listfood/>
         {/* <Text> {this.state.language} </Text> */}
         </View>
