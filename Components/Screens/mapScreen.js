@@ -154,8 +154,7 @@ class MapScreen extends Component {
         />
         <View
           style={{
-            flex: 1,
-            marginTop: 20,
+
             borderRadius: 4,
             borderWidth: 0,
             flexDirection: 'row',
@@ -172,7 +171,7 @@ class MapScreen extends Component {
         </View>
 
         <MapView
-          style={{ flex: 3 }}
+          style={{ flex: 2 }}
           region={{
             latitude: this.state.location.latitude,
             longitude: this.state.location.longitude,
@@ -184,7 +183,7 @@ class MapScreen extends Component {
         </MapView>
 
 
-        <View style={{ flex: 1,   }}>
+        <View style={{ flex: 3,   }}>
         <Listfood/>
         {/* <Text> {this.state.language} </Text> */}
         </View>
