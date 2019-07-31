@@ -93,6 +93,8 @@ export default class PlaceScreen extends Component {
         </Text>
 
 
+
+
           </View>
 </View>
 

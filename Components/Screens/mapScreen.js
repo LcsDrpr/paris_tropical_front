@@ -15,40 +15,51 @@ class PickerPlaceholderExample extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: undefined
+      selected: ''
     };
   }
-  onValueChange(value: string) {
+  onValueChange(value) {
+    console.log('console log value', value);
     this.setState({
       selected: value
     });
-  }
-  render() {
-    return (
-      <Content>
-        <Form>
-          <Picker
-            mode="dropdown"
-            iosIcon={<Icon name="arrow-down" style={{fontSize: 10}} />}
-            placeholder="Select you sim"
-            placeholderStyle={{ color: "#bfc6ea" }}
-            placeholderIconColor="#007aff"
-            textStyle={{fontSize: 12, paddingRight: 0}}
-            style={{ width: "100%" }}
-            selectedValue={this.state.selected}
-            onValueChange={this.onValueChange.bind(this)}
-          >
-            <Picker.Item label="Wallet" value="key0" />
-            <Picker.Item label="ATM Card" value="key1" />
-            <Picker.Item label="Debit Card" value="key2" />
-            <Picker.Item label="Credit Card" value="key3" />
-            <Picker.Item label="Net Banking" value="key4" />
-          </Picker>
-        </Form>
-      </Content>
-    );
-  }
-}
+    console.log('CONSOLE LOG STATE',value);
+        fetch('http://10.2.3.138:3000/finder?wannado='+value)
+          .then(function(response) {
+            return response.json();
+          })
+          .then((data)=>{
+            console.log(data);
+        })
+      }
+      render(){
+        return (
+          <Content>
+            <Form>
+              <Picker
+                mode="dropdown"
+                //iosIcon={<Icon name="arrow-down" style={{fontSize: 10}} />}
+                placeholder="I want to"
+                placeholderStyle={{ color: "#bfc6ea" }}
+                placeholderIconColor="#007aff"
+                textStyle={{fontSize: 12, paddingRight: 0}}
+                style={{ width: "100%" }}
+                selectedValue={this.state.selected}
+                onValueChange={ this.onValueChange.bind(this) }
+
+              >
+                <Picker.Item label="Eat breakfast" value="breakfast" />
+                <Picker.Item label="Eat lunch" value="lunch" />
+                {// <Picker.Item label="Wanna Drink" value="Wanna Drink" />
+                // <Picker.Item label="Wanna Go Out" value="Wanna Go Out" />
+                // <Picker.Item label="Net Banking" value="key4" />
+              }
+              </Picker>
+            </Form>
+          </Content>
+        );
+      }
+    }
 
 
 
