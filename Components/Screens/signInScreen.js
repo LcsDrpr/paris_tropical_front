@@ -104,7 +104,7 @@ render() {
                 containerStyle={styles.button}
                 title={signInButton}
 
-                onPress={() =>  fetch('http://10.2.3.40:3000/signin/', {
+                onPress={() =>  fetch('http://10.2.3.138:3000/signin/', {
                   method:'POST',
                   headers: {'Content-Type':'application/x-www-form-urlencoded'},
                   body:'email='+this.state.email+'&password='+this.state.password})
@@ -115,7 +115,7 @@ render() {
 
                   if(data.exist == true){
                     this.props.handleUserValid(data.user.lastname, data.user.firstname, data.user.email,data.user.city, data.user.country);
-                    fetch('http://10.2.3.40:3000/getMeteo/')
+                    fetch('http://10.2.3.138:3000/getMeteo/')
                     .then(function(response) {
                       return response.json();
                     })
@@ -213,4 +213,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(SignInScreen);
-

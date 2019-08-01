@@ -18,6 +18,7 @@ class HomeScreen extends Component {
   componentWillMount(){
     this.state.backgroundImg = require('../../assets/Backgroundflower.png');
     this.state.logo = require('../../assets/LogoParisTrop.png');
+
   }
 
   render() {
@@ -55,7 +56,7 @@ class HomeScreen extends Component {
     return (
       <View>
         <Header
-          titleStyle ={{textAalign:'center'}} 
+          titleStyle ={{textAalign:'center'}}
           barStyle="dark-content"
           leftComponent={
             <Image
@@ -84,7 +85,7 @@ class HomeScreen extends Component {
             </View>
 
           }
-          
+
           rightComponent={
             <TouchableOpacity
               onPress={()=>{this.props.navigation.toggleDrawer()}}

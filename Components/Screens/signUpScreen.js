@@ -59,17 +59,17 @@ class SignUpScreen extends Component {
             headerTitle= {
               <Image source={require('../../assets/LogoParisTrop.png')}/>
             }
-            titleStyle ={{textAalign:'center'}} 
+            titleStyle ={{textAalign:'center'}}
             barStyle="dark-content"
             leftComponent={
               <Icon
                 name="chevron-left"
                 size={25}
-                color="#41479b" 
+                color="#41479b"
                 onPress={() => { this.props.navigation.goBack() }}
               />
             }
-            centerComponent={ 
+            centerComponent={
               <Image
               style={{height:35, width:50}}
               source={this.state.logo}/>
@@ -105,7 +105,7 @@ class SignUpScreen extends Component {
               inputStyle={styles.placeholderstyle}
               containerStyle={{marginTop:10}}
               inputContainerStyle={{height:30}}
-              placeholder={emailText} onChangeText={(value) => this.setState({email: value})} 
+              placeholder={emailText} onChangeText={(value) => this.setState({email: value})}
                 value={this.state.email} />
 
             <Input
@@ -129,12 +129,12 @@ class SignUpScreen extends Component {
              <TouchableOpacity
               style={{ width:'85%',
               height:60,marginTop:20}}
-            > 
-              <Button 
+            >
+              <Button
                 type='clear'
                 titleStyle={{color:'#41479b',textAlign:'center',width:'85%'}}
                 containerStyle={styles.button}
-                onPress={() => fetch('http://10.2.3.40:3000/signup/', {
+                onPress={() =>  fetch('http://10.2.3.138:3000/signup', {
                   method:'POST',
                   headers: {'Content-Type':'application/x-www-form-urlencoded'},
                   body:'firstname='+this.state.firstname+'&lastname='+this.state.lastname+'&email='+this.state.email+'&password='+this.state.password+'&city='+this.state.city
@@ -159,7 +159,7 @@ class SignUpScreen extends Component {
 
                 })
               }
-              
+
               title={signUpButtonText}
               />
             </TouchableOpacity>
@@ -200,14 +200,14 @@ const styles = StyleSheet.create({
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleUserValid: function(lastname,firstname,email,city,country) { 
+    handleUserValid: function(lastname,firstname,email,city,country) {
         dispatch( {type: 'setUserData',
       Nom:lastname,
       Prenom:firstname,
       Email:email,
       City:city,
       Country:country
-      } ) 
+      } )
     },
     getMeteo: function(temp, icon){
       console.log("TEMPERATURE !",temp + "ICONE PEUTETRE SOLEIL",icon);
@@ -224,7 +224,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(
-  mapStateToProps, 
+  mapStateToProps,
   mapDispatchToProps
 )(SignUpScreen);
 //export default SignUpScreen;

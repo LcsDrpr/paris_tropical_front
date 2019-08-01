@@ -1,42 +1,73 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, Picker, ScrollView, TouchableOpacity,  } from "react-native";
+import { StyleSheet, Text, View, Button,  ScrollView, TouchableOpacity,  } from "react-native";
 import MapView from "react-native-maps";
 import { Marker } from "react-native-maps";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
 import SidebarScreen from './sidebarScreen';
 import { ListItem, Header, Image } from 'react-native-elements';
+import { Container, Content, Icon, Picker, Form, TextStyle } from "native-base";
 
 
 
 
-class Menupicker extends Component {
-
-  state = {
-    language: null
+class PickerPlaceholderExample extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: ''
+    };
   }
+  onValueChange(value) {
+    console.log('console log value', value);
+    this.setState({
+      selected: value
+    });
+    console.log('CONSOLE LOG STATE',value);
+        fetch('http://10.2.3.138:3000/finder?wannado='+value)
+          .then(function(response) {
+            return response.json();
+          })
+          .then((data)=>{
+            console.log(data);
+        })
+      }
+      render(){
+        return (
+          <Content>
+            <Form>
+              <Picker
+                mode="dropdown"
+                //iosIcon={<Icon name="arrow-down" style={{fontSize: 10}} />}
+                placeholder="I want to"
+                placeholderStyle={{ color: "#bfc6ea" }}
+                placeholderIconColor="#007aff"
+                textStyle={{fontSize: 12, paddingRight: 0}}
+                style={{ width: "100%" }}
+                selectedValue={this.state.selected}
+                onValueChange={ this.onValueChange.bind(this) }
 
-  render() {
-    return (
-        <Picker 
-          selectedValue={this.state.language}
-          style={{  height: 40, width: 120,  }}
-          onValueChange={(itemValue, itemIndex) =>
-            this.setState({ language: itemValue })
-          }
-        >
-          <Picker.Item label="Java" value="java" />
-          <Picker.Item label="JavaScript" value="js" />
-          <Picker.Item label="JavaScript" value="js" />
+              >
+                <Picker.Item label="Eat breakfast" value="breakfast" />
+                <Picker.Item label="Eat lunch" value="lunch" />
+                {// <Picker.Item label="Wanna Drink" value="Wanna Drink" />
+                // <Picker.Item label="Wanna Go Out" value="Wanna Go Out" />
+                // <Picker.Item label="Net Banking" value="key4" />
+              }
+              </Picker>
+            </Form>
+          </Content>
+        );
+      }
+    }
 
 
 
-        </Picker>
- 
-     
-    );
-  }
-}
+
+
+
+
+
 
 class MapScreen extends Component {
   constructor(props) {
@@ -51,10 +82,10 @@ class MapScreen extends Component {
     displayHistorique: true,
 
     }
-    
+
   }
   // state = {
-    
+
   // };
 
 
@@ -109,12 +140,12 @@ class MapScreen extends Component {
       });
     }
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 2 }}>
        <Header
-          titleStyle ={{textAalign:'center'}} 
+          titleStyle ={{textAalign:'center'}}
           barStyle="dark-content"
           leftComponent={
-            
+
             <Image
             style={{height:35, width:50}}
             source={this.state.logo}
@@ -138,19 +169,19 @@ class MapScreen extends Component {
         />
         <View
           style={{
-          
+
             borderRadius: 4,
             borderWidth: 0,
             flexDirection: 'row',
             justifyContent: 'center',
             borderColor: "#d6d7da"
-            
+
           }}
         >
 
-          <Menupicker />
-          <Menupicker/>
-          <Menupicker/>
+          <PickerPlaceholderExample/>
+          <PickerPlaceholderExample/>
+          <PickerPlaceholderExample/>
 
         </View>
 
@@ -167,7 +198,7 @@ class MapScreen extends Component {
         </MapView>
 
 
-        <View style={{ flex: 3,   }}>
+        <View style={{ flex: 2,   }}>
         <Listfood/>
         {/* <Text> {this.state.language} </Text> */}
         </View>
@@ -184,7 +215,7 @@ class MapScreen extends Component {
       {
         name: 'City Food',
         avatar_url: 'https://cdn.pixabay.com/photo/2015/10/02/15/59/olive-oil-968657_960_720.jpg',
-       
+
       },
       {
         name: 'Halal Eat ',
@@ -193,34 +224,34 @@ class MapScreen extends Component {
        {
         name: 'City Food',
         avatar_url: 'https://cdn.pixabay.com/photo/2015/10/02/15/59/olive-oil-968657_960_720.jpg',
-       
+
       },
       {
         name: 'City Food',
         avatar_url: 'https://cdn.pixabay.com/photo/2015/10/02/15/59/olive-oil-968657_960_720.jpg',
-       
+
       },
       {
         name: 'City Food',
         avatar_url: 'https://cdn.pixabay.com/photo/2015/10/02/15/59/olive-oil-968657_960_720.jpg',
-       
+
       },
     ]
     return (
       <View >
 
-      <ScrollView contentContainerStyle={styles.contentContainer}> 
+      <ScrollView contentContainerStyle={styles.contentContainer}>
 
          {
     list.map((l, i) => (
-      <ListItem   
+      <ListItem
         key={i}
         leftAvatar={{ source: { uri: l.avatar_url } }}
         title={l.name}
       />
     ))
   }
-      </ScrollView> 
+      </ScrollView>
       </View>
 
     )

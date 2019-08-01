@@ -97,7 +97,7 @@ class IdentificationScreen extends Component {
                    <Text> PASSE</Text>
                 </TouchableOpacity>
 
-              
+
                 <TouchableOpacity
                   onPress={() => { this.props.navigation.navigate('signUp')}}
                   style={{ width:'85%',
