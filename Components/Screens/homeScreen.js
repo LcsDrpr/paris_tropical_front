@@ -22,6 +22,10 @@ class HomeScreen extends Component {
 
   render() {
 
+    // api Taux de change 
+
+   
+
     console.log("CONSOLE LOG METEO !! : ",this.props.meteo);
 
     var meteoIcon='http://openweathermap.org/img/wn/'+this.props.meteo.icon+'.png';
@@ -72,7 +76,10 @@ class HomeScreen extends Component {
               />
               <Text style={{marginTop:10}}>
                 {meteoTemp}
+                {/* le Taux de Change */}
+               
               </Text>
+           
 
             </View>
 
@@ -99,6 +106,7 @@ class HomeScreen extends Component {
               <Text>{localHour}</Text>
               <Text>{awayHour}</Text>
               <Text>{exchangeRate}</Text>
+              <Text>{this.props.dataChange.rates.USD} USD/EUR</Text>
 
 
             </View>
@@ -117,7 +125,7 @@ class HomeScreen extends Component {
 }
 
 function mapStateToProps(state) {
-  return { language: state.language, user: state.user, meteo : state.meteo  }
+  return { language: state.language, user: state.user, meteo : state.meteo , dataChange: state.change }
 }
 
 

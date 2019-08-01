@@ -17,6 +17,21 @@ class LanguagesScreen extends Component {
     };
   }
 
+componentWillMount() {
+  fetch('https://api.exchangeratesapi.io/latest')
+
+  .then(function(response) {
+    return response.json();
+  })
+  .then(data => {
+    console.log("============>>>>data", data);
+    this.props.handlChange(data)
+  })
+  .catch(function(error) {
+    console.log('Request failed', error)
+  });
+}
+
   /*async componentDidMount() {
 
     await Font.loadAsync({
@@ -95,6 +110,7 @@ class LanguagesScreen extends Component {
     }
 }
 
+
 const styles = StyleSheet.create({
 
   shadow:{
@@ -126,6 +142,9 @@ function mapDispatchToProps(dispatch) {
     },
     ptChosen: function(){
       dispatch({type:'ptchosen'})
+    },
+    handlChange: function(dataChange) { 
+      dispatch( {type: 'change' ,  dataChange} ) 
     }
   }
 }
@@ -134,3 +153,4 @@ export default connect(
   null, 
   mapDispatchToProps
 )(LanguagesScreen);
+
